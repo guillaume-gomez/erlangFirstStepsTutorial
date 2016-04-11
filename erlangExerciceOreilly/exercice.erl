@@ -1,5 +1,5 @@
 -module(exercice).
--export([sum/1, sum/2]).
+-export([sum/1, sum/2, create/1, reverse_create/1]).
 
 %Exercice 1
 sum(0) -> 0;
@@ -18,3 +18,18 @@ sum(Min, Max) when Max > Min ->
   sum(Min, Max - 1) + Max.
 
 
+%Exercice 2
+
+create(0) -> [];
+
+create(Number) when Number > 0 -> lists:flatten([create(Number -1 ), Number ]).
+
+
+reverse_create(0) -> [];
+
+reverse_create(Number) when Number > 0 -> lists:flatten([Number, create(Number - 1)]).
+
+%reverse_create(Number) lists:reverse(create(Number)).
+
+
+%Exercice 3
