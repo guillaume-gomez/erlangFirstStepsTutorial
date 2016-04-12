@@ -1,5 +1,5 @@
 -module(exercice).
--export([sum/1, sum/2, create/1, reverse_create/1]).
+-export([sum/1, sum/2, create/1, reverse_create/1, mytool/2, side_effect/1]).
 
 %Exercice 1
 sum(0) -> 0;
@@ -33,3 +33,10 @@ reverse_create(Number) when Number > 0 -> lists:flatten([Number, create(Number -
 
 
 %Exercice 3
+side_effect(Number) ->
+  N = mytool(Number, []),
+  io:format("Number:~p~n",[N]).
+
+mytool(0, Acc) -> Acc;
+
+mytool(Number, Acc) -> mytool(Number-1, [Number|Acc]).
