@@ -1,5 +1,5 @@
 -module(exercice).
--export([sum/1, sum/2, create/1, reverse_create/1, reverse_create2/1, create2/2]).
+-compile(export_all).
 
 %Exercice 1
 sum(0) -> 0;
@@ -44,4 +44,18 @@ create2(0, Acc) ->
 create2(Number, Acc) ->
   create2(Number-1, [Number| Acc]).
 
-%Exercice 3
+%Exercice 5
+filter(Arr, N) ->
+  filter(Arr, [], N).
+
+filter([], Acc, _) ->
+  lists:reverse(Acc);
+
+filter([H | T ], Acc, N) when H =< N ->
+  filter(T, [H | Acc], N);
+
+filter([_ | T ], Acc, N) ->
+  filter(T, Acc, N).
+
+
+
