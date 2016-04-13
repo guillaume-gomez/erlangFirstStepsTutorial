@@ -58,4 +58,10 @@ filter([_ | T ], Acc, N) ->
   filter(T, Acc, N).
 
 
+reverse(Acc) -> reverse(Acc, []).
+
+reverse([], Acc) -> Acc;
+
+reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
+
 
