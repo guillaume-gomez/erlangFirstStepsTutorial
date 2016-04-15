@@ -64,4 +64,16 @@ reverse([], Acc) -> Acc;
 
 reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
 
+concatenate_acc([], Acc) -> exercice:reverse(Acc);
+
+concatenate_acc([H | T] , Acc) -> 
+  case H of
+    [] -> concatenate_acc(T, Acc);
+    _  -> concatenate_acc(T, [H | Acc])
+  end.  
+
+concatenate(List) -> concatenate_acc(List, []).
+
+  
+
 
