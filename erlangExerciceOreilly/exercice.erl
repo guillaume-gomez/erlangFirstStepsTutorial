@@ -45,6 +45,8 @@ create2(Number, Acc) ->
   create2(Number-1, [Number| Acc]).
 
 %Exercice 5
+
+%1
 filter(Arr, N) ->
   filter(Arr, [], N).
 
@@ -57,13 +59,14 @@ filter([H | T ], Acc, N) when H =< N ->
 filter([_ | T ], Acc, N) ->
   filter(T, Acc, N).
 
-
+%2
 reverse(Acc) -> reverse(Acc, []).
 
 reverse([], Acc) -> Acc;
 
 reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
 
+%3
 concatenate_acc([], Acc) -> exercice:reverse(Acc);
 
 concatenate_acc([H | T] , Acc) -> 
@@ -73,6 +76,15 @@ concatenate_acc([H | T] , Acc) ->
   end.  
 
 concatenate(List) -> concatenate_acc(List, []).
+
+%4
+flatten( [] ) -> [];
+
+flatten( [H | T] ) ->
+  case H of
+    [Head|_] -> flatten(Head);
+    _ -> [concatenate(H), flatten(T)]
+  end.
 
   
 
