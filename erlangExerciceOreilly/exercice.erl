@@ -44,6 +44,17 @@ create2(0, Acc) ->
 create2(Number, Acc) ->
   create2(Number-1, [Number| Acc]).
 
+
+%Exercice 3
+side_effect(Number) ->
+  N = mytool(Number, []),
+  io:format("Number:~p~n",[N]).
+
+mytool(0, Acc) -> Acc;
+
+mytool(Number, Acc) -> mytool(Number-1, [Number|Acc]).
+
+
 %Exercice 5
 
 %1
@@ -66,6 +77,8 @@ reverse([], Acc) -> Acc;
 
 reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
 
+reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
+
 %3
 concatenate_acc([], Acc) -> exercice:reverse(Acc);
 
@@ -85,7 +98,5 @@ flatten( [H | T] ) ->
     [Head|_] -> flatten(Head);
     _ -> [concatenate(H), flatten(T)]
   end.
-
-  
 
 
