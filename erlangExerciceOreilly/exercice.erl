@@ -80,7 +80,10 @@ reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
 %3
 concatenate_acc([], Acc) -> exercice:reverse(Acc);
 
-concatenate_acc([H | T] , Acc) -> 
+concatenate_acc( [H | T], Acc) when is_list(H) ->
+  concatenate_acc(T,concatenate_acc( Acc, H));
+
+concatenate_acc([H | T] , Acc) ->
   case H of
     [] -> concatenate_acc(T, Acc);
     _  -> concatenate_acc(T, [H | Acc])
