@@ -80,7 +80,10 @@ reverse([H | T], Acc) -> reverse(T, [ H | Acc ] ).
 %3
 concatenate_acc([], Acc) -> exercice:reverse(Acc);
 
-concatenate_acc([H | T] , Acc) -> 
+concatenate_acc( [H | T], Acc) when is_list(H) ->
+  concatenate_acc(T,concatenate_acc( Acc, H));
+
+concatenate_acc([H | T] , Acc) ->
   case H of
     [] -> concatenate_acc(T, Acc);
     _  -> concatenate_acc(T, [H | Acc])
@@ -89,12 +92,14 @@ concatenate_acc([H | T] , Acc) ->
 concatenate(List) -> concatenate_acc(List, []).
 
 %4
-flatten( [] ) -> [];
+flatten_acc( [], Acc) -> lists:reverse(Acc);
 
-flatten( [H | T] ) ->
+flatten_acc( [H | T], Acc) ->
   case is_list(H) of
-    true -> [concatenate(flatten(H)) | flatten(T)];
-    false -> [H | flatten(T)]
-  end.
+    true -> flatten_acc(T, flatten_acc( Acc, concatenate(H)));
+    false -> flatten_acc(T, [H | Acc])
+end.
+
+flatten( List ) -> flatten_acc(List, []).
 
 
