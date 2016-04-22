@@ -1,14 +1,20 @@
 -module(sort).
 -compile(export_all).
 
-swap(List, IndexElem1, IndexElem2) when ((IndexElem1 > 1) and (IndexElem2 > 1)) ->
-    {List2,[F|List3]} = lists:split(IndexElem1-1, List),
-    LT = List2++[lists:nth(IndexElem2, List)| List3],
-    {List4,[_|List5]} = lists:split(IndexElem2-1, LT),
-    List4++[F|List5].
+quick_sort([]) -> [];
 
-%split_loop(List, )
+quick_sort([Single]) -> [Single];
 
-%split(List, First, Last, Pivot) ->
-%    List2 = swap(List, Pivot, Last),
+quick_sort([Pivot|Rest]) ->
+    {Smallers, Greaters} = quick_sort(Pivot, Rest),
+    SortedSmallers = quick_sort(Smallers),
+    SortedGreaters = quick_sort(Greaters),
+    SortedSmallers ++ [Pivot] ++ SortedGreaters.
 
+quick_sort(Pivot, List) -> quick_sort(Pivot, [], [], List).
+
+quick_sort(_Pivot, Smallers, Greaters, []) -> {Smallers, Greaters};
+quick_sort(Pivot, Smallers, Greaters, [First|Rest]) when First < Pivot ->
+    quick_sort(Pivot, [First|Smallers], Greaters, Rest);
+quick_sort(Pivot, Smallers, Greaters, [First|Rest]) when First >= Pivot ->
+    quick_sort(Pivot, Smallers, [First|Greaters], Rest)
